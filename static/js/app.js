@@ -1,0 +1,4 @@
+async function poll(){const r=await fetch('/api/metrics');if(!r.ok)return;const x=await r.json();['cpu','memory','disk'].forEach(k=>{const el=document.getElementById(k);if(el)el.textContent=x.metrics[k]+'%'});}
+setInterval(poll,5000);
+if(document.getElementById('resourceChart')){new Chart(document.getElementById('resourceChart'),{type:'doughnut',data:{labels:['CPU','Memory','Disk'],datasets:[{data:[window.initialMetrics.cpu,window.initialMetrics.memory,window.initialMetrics.disk]}]},options:{plugins:{legend:{labels:{color:'#fff'}}}}})}
+if(document.getElementById('analyticsChart')){fetch('/api/metrics').then(r=>r.json()).then(x=>new Chart(document.getElementById('analyticsChart'),{type:'bar',data:{labels:['CPU','Memory','Disk'],datasets:[{label:'Utilization %',data:[x.metrics.cpu,x.metrics.memory,x.metrics.disk]}]},options:{scales:{y:{beginAtZero:true,max:100}}}}))}

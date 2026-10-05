@@ -1,0 +1,1 @@
+{%extends 'base.html'%}{%block title%}Alert Center{%endblock%}{%block content%}<div class=intro><small>EVENT MANAGEMENT</small><h2>Alert Center</h2><p>Threshold-based health signals.</p></div><div class=panel>{%for a in alerts%}<div class="alert large {{a.level}}"><b>{{a.title}}</b><span>{{a.message}}</span><em>{{a.level|upper}}</em></div>{%endfor%}</div>{%endblock%}
